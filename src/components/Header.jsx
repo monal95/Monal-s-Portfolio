@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Github, Linkedin, Sun, Moon, Menu, X } from 'lucide-react';
+import { Github, Linkedin, Sun, Moon, Menu, X, Download } from 'lucide-react';
 
 const Header = ({ darkMode, toggleDarkMode, scrollToSection }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -11,6 +11,16 @@ const Header = ({ darkMode, toggleDarkMode, scrollToSection }) => {
     { label: 'Certifications', id: 'certifications' },
     { label: 'Contact', id: 'contact' }
   ];
+
+  const handleResumeDownload = () => {
+    // Create a temporary link element to trigger download
+    const link = document.createElement('a');
+    link.href = '/Monal(final).pdf'; // You'll need to place your resume.pdf in the public folder
+    link.download = 'Monal.pdf'; // Replace with your actual name
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const handleNavClick = (id) => {
     scrollToSection(id);
@@ -47,6 +57,15 @@ const Header = ({ darkMode, toggleDarkMode, scrollToSection }) => {
                   </button>
                 </li>
               ))}
+              <li>
+                <button
+                  onClick={handleResumeDownload}
+                  className={`flex items-center space-x-2 ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'} font-medium transition-colors duration-200 hover:text-purple-500`}
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Resume</span>
+                </button>
+              </li>
             </ul>
           </nav>
 
@@ -75,6 +94,15 @@ const Header = ({ darkMode, toggleDarkMode, scrollToSection }) => {
                     </button>
                   </li>
                 ))}
+                <li>
+                  <button
+                    onClick={handleResumeDownload}
+                    className={`flex items-center space-x-2 w-full text-left px-3 py-2 rounded-lg ${darkMode ? 'text-gray-300 hover:bg-gray-800 hover:text-white' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'} font-medium transition-colors duration-200`}
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Resume</span>
+                  </button>
+                </li>
               </ul>
             </nav>
           </div>
