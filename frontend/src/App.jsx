@@ -8,6 +8,7 @@ import Contact from './components/Contact';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
+  const [animationTrigger, setAnimationTrigger] = useState('');
 
   useEffect(() => {
     const savedMode = localStorage.getItem('darkMode');
@@ -31,6 +32,8 @@ function App() {
         top: elementPosition,
         behavior: 'smooth'
       });
+      // Trigger animation for the section
+      setAnimationTrigger(sectionId);
     }
   };
 
@@ -44,9 +47,9 @@ function App() {
       
       <main>
         <AboutMe darkMode={darkMode} />
-        <Projects darkMode={darkMode} />
-        <Skills darkMode={darkMode} />
-        <Certifications darkMode={darkMode} />
+        <Projects darkMode={darkMode} triggerAnimation={animationTrigger === 'projects'} />
+        <Skills darkMode={darkMode} triggerAnimation={animationTrigger === 'skills'} />
+        <Certifications darkMode={darkMode} triggerAnimation={animationTrigger === 'certifications'} />
         <Contact darkMode={darkMode} />
       </main>
 

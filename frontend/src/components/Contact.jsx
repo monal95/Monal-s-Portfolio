@@ -113,7 +113,7 @@ const Contact = ({ darkMode }) => {
                       Location
                     </h4>
                     <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                      Hosur , Kirshnagiri
+                      Hosur , India
                     </p>
                   </div>
                 </div>

@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Award, Calendar, ExternalLink } from 'lucide-react';
 
-const Certifications = ({ darkMode }) => {
+const Certifications = ({ darkMode, triggerAnimation }) => {
+  const [animatedCerts, setAnimatedCerts] = useState(new Set());
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
   const certifications = [
     {
       id: 1,
@@ -16,8 +20,58 @@ const Certifications = ({ darkMode }) => {
    
   ];
 
+  useEffect(() => {
+    if (triggerAnimation) {
+      setAnimatedCerts(new Set());
+      certifications.forEach((_, index) => {
+        setTimeout(() => {
+          setAnimatedCerts((prev) => new Set([...prev, index]));
+        }, index * 200);
+      });
+    }
+  }, [triggerAnimation]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+          setAnimatedCerts(new Set());
+          certifications.forEach((_, index) => {
+            setTimeout(() => {
+              setAnimatedCerts((prev) => new Set([...prev, index]));
+            }, index * 200);
+          });
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isVisible]);
+
   return (
-    <section id="certifications" className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
+    <section id="certifications" ref={sectionRef} className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
+      <style>{`
+        @keyframes slideInFromLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-100%);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        .animate-slide-in {
+          animation: slideInFromLeft 0.6s ease-out forwards;
+        }
+      `}</style>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className={`text-4xl lg:text-5xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -30,13 +84,15 @@ const Certifications = ({ darkMode }) => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {certifications.map((cert) => (
+          {certifications.map((cert, index) => (
   <div
     key={cert.id}
     className={`${
       darkMode ? 'bg-gray-900' : 'bg-gray-50'
     } rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2
-      ${cert.title.includes('Oracle') ? 'lg:col-start-2' : ''}
+      ${cert.title.includes('Oracle') ? 'lg:col-start-2' : ''} ${
+        animatedCerts.has(index) ? 'animate-slide-in' : 'opacity-0 translate-x-[-100%]'
+      }
     `}
   >
     <div className="relative overflow-hidden group">
