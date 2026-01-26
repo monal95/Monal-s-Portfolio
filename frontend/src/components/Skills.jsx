@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Code, Database, Server, Palette } from 'lucide-react';
+import { Code, Database, Server, Palette, Code2 } from 'lucide-react';
 
 const Skills = ({ darkMode, triggerAnimation }) => {
   const [animatedCategories, setAnimatedCategories] = useState(new Set());
@@ -13,19 +13,15 @@ const Skills = ({ darkMode, triggerAnimation }) => {
       skills: [
         { name: "React", level: 85 },
         { name: "JavaScript", level: 85 },
-        { name: "TypeScript", level: 70 },
         { name: "HTML/CSS", level: 95 },
-        { name: "Tailwind CSS", level: 70 }
       ]
     },
     {
       icon: Server,
       title: "Backend Development",
       skills: [
-        { name: "Node.js", level: 75 },
-        { name: "Express.js", level: 75 },
-        { name: "Python", level: 80 },
-        { name: "Java", level: 90 },
+        { name: "Node.js", level: 80 },
+        { name: "Express.js", level: 80 },
         { name: "REST APIs", level: 75 }
       ]
     },
@@ -35,14 +31,23 @@ const Skills = ({ darkMode, triggerAnimation }) => {
       skills: [
         { name: "MongoDB", level: 80 },
         { name: "MySQL", level: 75 },
-        { name: "Firebase", level: 70 }
       ]
     },
     {
       icon: Palette,
       title: "Design & Tools",
       skills: [      
-        { name: "Git/GitHub", level: 80 }
+    { name: "Git/GitHub", level: 80 },
+    { name: "Power BI", level: 70 }
+      ]
+    },
+    {
+      icon: Code2,
+      title: "Programming Language",
+      skills: [      
+    { name: "Java", level:85 },
+    { name: "C", level: 80 },
+    { name: "Python", level: 75 }
       ]
     }
   ];
