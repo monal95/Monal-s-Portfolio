@@ -1,16 +1,24 @@
 {
-  "name": "student-portfolio-frontend",
+  "name": "student-portfolio-website",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"npm run server\" \"vite\"",
+    "server": "nodemon server/server.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^4.18.2",
     "lucide-react": "^0.344.0",
+    "mongoose": "^8.0.3",
+    "node": "^22.18.0",
+    "nodemon": "^3.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
