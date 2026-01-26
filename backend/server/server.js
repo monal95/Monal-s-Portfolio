@@ -18,17 +18,20 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../dist')));
 
 // MongoDB Connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://monalprashanth98:Monal1234@cluster0.9zvi9vx.mongodb.net/portfolio?retryWrites=true&w=majority&appName=Cluster0';
+const MONGODB_URI = process.env.MONGODB_URI;
 
-mongoose.connect(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+if (!MONGODB_URI) {
+  console.error('MONGODB_URI environment variable is not set');
+  process.exit(1);
+}
+
+mongoose.connect(MONGODB_URI)
 .then(() => {
   console.log('Connected to MongoDB');
 })
 .catch((error) => {
   console.error('MongoDB connection error:', error);
+  process.exit(1);
 });
 
 // Contact Message Schema
