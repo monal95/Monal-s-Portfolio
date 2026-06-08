@@ -15,9 +15,9 @@ const Header = ({ darkMode, toggleDarkMode, scrollToSection }) => {
   const handleResumeDownload = () => {
     // Create a temporary link element to trigger download
     const link = document.createElement('a');
-    link.href = '/Monal .pdf'; // You'll need to place your resume.pdf in the public folder
-    link.href = '/Monal CV.pdf'; // You'll need to place your resume.pdf in the public folder
-    link.download = 'Monal CV.pdf'; // Replace with your actual name
+    link.href = '/Monal CV 3.pdf'; // You'll need to place your resume.pdf in the public folder
+    link.href = '/Monal CV 3.pdf'; // You'll need to place your resume.pdf in the public folder
+    link.download = 'Monal CV 3.pdf'; // Replace with your actual name
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
